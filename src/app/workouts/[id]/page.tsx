@@ -1,4 +1,7 @@
+import WorkoutDetails from "@/components/WorkoutDetails";
+import { getWorkout } from "@/lib/api";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface WorkoutDetailsPageProps {
     params: Promise<{
@@ -11,24 +14,29 @@ export default async function WorkoutDetailsPage({
 }: WorkoutDetailsPageProps) {
     const { id } = await params;
 
+    let workout;
+
+    try {
+        workout = await getWorkout(id);
+    } catch {
+        notFound();
+    }
+
     return (
         <main className="min-h-screen bg-[#0b0d10]">
-            <section className="mx-auto max-w-7xl px-5 py-10">
-                <p className="text-xs text-zinc-500">
-                    Workout ID: {id}
-                </p>
-
-                <h1 className="mt-3 text-3xl font-black uppercase">
-                    Workout Details
-                </h1>
-
+            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-5 lg:py-12">
+                {/* Back button */}
                 <Link
-                    href="/"
-                    className="mt-6 inline-block text-sm text-lime-400"
+                    href='/#library'
+                    className="mb-6 inline-flex items-center gap-2 text-xs font-medium text-zinc-500 transition hover:text-lime-400"
                 >
-                    ← Back to workouts
+                    ← Back to library
                 </Link>
-            </section>
+                <WorkoutDetails workout={workout}>
+
+                </WorkoutDetails>
+
+            </div>
         </main>
     );
 }
