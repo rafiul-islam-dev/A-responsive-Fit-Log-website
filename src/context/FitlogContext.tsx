@@ -132,8 +132,14 @@ export const FitlogProvider = ({
      * Remove workout from today's plan
      */
     const removeFromPlan = (id: number) => {
+        // Remove from today's plan
         setPlan((current) =>
             current.filter((workout) => workout.id !== id)
+        );
+
+        // Also reset its completed status
+        setDone((current) =>
+            current.filter((workoutId) => workoutId !== id)
         );
 
         toast.success("Removed from today's plan");
