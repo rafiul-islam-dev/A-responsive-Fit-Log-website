@@ -14,17 +14,7 @@ export default async function HomePage() {
         {/* Library */}
         <section
           id="library"
-          className="m4-12 scroll-mt-24"
-        >
-          <div className="mb-5">
-            <h2 className="text-xl font-black font-oswald uppercase text-white sm:text-2xl">
-              The Library
-            </h2>
-
-            <p className="mt-1 text-xs text-zinc-500">
-              Twelve lifts covering every major muscle group.
-            </p>
-          </div>
+          className="m4-12 scroll-mt-24">
 
           <WorkoutGrid workouts={workouts}></WorkoutGrid>
 

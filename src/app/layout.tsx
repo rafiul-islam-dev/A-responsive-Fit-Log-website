@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
-// import Footer from "@/components/Footer";
+import Footer from "@/components/Footer";
 import { FitlogProvider } from "@/context/FitlogContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,7 +24,7 @@ export default function RootLayout({
 
           {children}
 
-          {/* <Footer /> */}
+          <Footer />
 
           <ToastContainer
             position="top-right"
