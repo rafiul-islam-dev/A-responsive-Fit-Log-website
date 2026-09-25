@@ -1,5 +1,6 @@
 "use client";
 
+import { useFitlog } from "@/context/FitlogContext";
 import { Workout } from "@/types/workout";
 
 interface WorkoutDetailsProps {
@@ -7,6 +8,14 @@ interface WorkoutDetailsProps {
 }
 
 const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
+
+    const {
+        addToPlan,
+        saveWorkout,
+        isInPlan,
+        isSaved,
+    } = useFitlog();
+
     return (
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
             {/* Left - Image */}
@@ -115,18 +124,24 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                     <button
                         type="button"
+                        onClick={() => addToPlan(workout)}
                         className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-lime-400 px-5 py-3 text-xs font-bold uppercase text-black transition hover:bg-lime-300"
                     >
                         <span>＋</span>
-                        Add to today's plan
+                        {isInPlan(workout.id)
+                            ? "Already in today's plan"
+                            : "Add to today's plan"}
                     </button>
 
                     <button
                         type="button"
+                        onClick={() => saveWorkout(workout)}
                         className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-transparent px-5 py-3 text-xs font-bold uppercase text-white transition hover:border-zinc-500"
                     >
-                        <span>♡</span>
-                        Save for later
+                        <span>{isSaved(workout.id) ? "♥" : "♡"}</span>
+                        {isSaved(workout.id)
+                            ? "Saved"
+                            : "Save for later"}
                     </button>
                 </div>
             </div>

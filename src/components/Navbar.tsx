@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import Image from 'next/image';
+import { useFitlog } from '@/context/FitlogContext';
+
 
 const Navbar = () => {
     const pathname = usePathname();
-
+    const {plan, saved} = useFitlog();
     const isWorkoutActive = pathname === "/";
     const isPlanActive = pathname === "/my-plan";
 
@@ -65,7 +67,7 @@ const Navbar = () => {
                         <span>Plan</span>
 
                         <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-lime-400 px-1.5 text-[10px] font-bold text-black">
-                            0
+                            {plan.length}
                         </span>
                     </Link>
 
@@ -76,7 +78,7 @@ const Navbar = () => {
                         <span>Saved</span>
 
                         <span className="flex h-5 min-w-5 items-center justify-center rounded-full border border-zinc-600 px-1.5 text-[10px] text-zinc-300">
-                            0
+                            {saved.length}
                         </span>
                     </Link>
                 </div>

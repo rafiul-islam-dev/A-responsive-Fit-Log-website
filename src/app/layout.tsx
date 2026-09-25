@@ -1,27 +1,38 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import Navbar from "@/components/Navbar";
-import {Oswald} from "next/font/google"
-
-const oswald = Oswald({
-  variable: "--font-oswald",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+// import Footer from "@/components/Footer";
+import { FitlogProvider } from "@/context/FitlogContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Fitlog",
+  title: "FitLog",
   description: "Workout Library",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html
-      lang="en" className={oswald.variable}>
-
+    <html lang="en">
       <body className="bg-[#0b0d10] text-white antialiased">
-        <Navbar></Navbar>
-        {children}
+        <FitlogProvider>
+          <Navbar />
+
+          {children}
+
+          {/* <Footer /> */}
+
+          <ToastContainer
+            position="top-right"
+            autoClose={2500}
+            theme="dark"
+            style={{ top: "80px", right: "20px" }}
+          />
+        </FitlogProvider>
       </body>
     </html>
   );
