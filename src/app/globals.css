@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+.font-oswald {
+  font-family: var(--font-oswald), sans-serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
